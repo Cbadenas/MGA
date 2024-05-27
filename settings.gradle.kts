@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "MGATest"
 include(":app")
- 
+include(":core:data")
+include(":core:domain")
