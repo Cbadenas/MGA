@@ -21,7 +21,9 @@ Configuracion simple de una arquitectura clean, con separacion en capas
 (se podria optar por una separacion por features, pero no encontre sentido en hacer esa configuracion en este momento)
 
 
+## Instrucciones
 
+Nada especifico. Clonar el repo, compilar y a correr.
 
 
 
