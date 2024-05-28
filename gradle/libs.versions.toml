@@ -36,7 +36,7 @@ compose-navigation = { group = "androidx.navigation", name = "navigation-compose
 
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
-hilt-navigation-compiler = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-nav"}
+hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-nav"}
 
 retrofit = {group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit"}
 gson-converter = {group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit"}
