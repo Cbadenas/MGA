@@ -5,7 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -16,7 +19,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.dto.PokedexListEntry
+import kotlinx.coroutines.Dispatchers
 
 /**
  * Screen to display a list of Pokemon
@@ -40,12 +51,14 @@ fun PokemonListScreen(
             state.pokemonList.size / 2 + 1
         }
 
-        items(itemCount){
-            if (it >= itemCount - 1 && !state.endReached) {
+        items(itemCount) { index ->
+            if (index >= itemCount - 1 && !state.endReached) {
                 onEvent(PokedexListActions.LoadPodemonList)
             }
 
-            //TODO() Implement row Logic
+            PokemonItemRow(
+                pokemon = state.pokemonList[index]
+            )
         }
 
     }
@@ -66,6 +79,45 @@ fun PokemonListScreen(
 
 }
 
+/**
+ * Item Row representing a Pokemon
+ */
+@Composable
+fun PokemonItemRow(pokemon: PokedexListEntry) {
+
+    Column(
+        modifier = Modifier.padding(16.dp)
+    ) {
+        val imageRequest = ImageRequest.Builder(LocalContext.current)
+            .data(pokemon.imageUrl)
+            .dispatcher(Dispatchers.IO)
+            .build()
+
+        AsyncImage(
+            model = imageRequest,
+            contentDescription = "Image Description",
+            modifier = Modifier
+                .size(120.dp)
+                .align(Alignment.CenterHorizontally),
+            contentScale = ContentScale.Crop,
+            onSuccess = {
+
+            },
+        )
+
+        Text(
+            text = pokemon.pokemonName,
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+
+}
+
+/**
+ * Retry section to display error message
+ */
 @Composable
 fun RetrySection(
     error: String,
@@ -84,6 +136,9 @@ fun RetrySection(
 
 }
 
+/**
+ * Preview method for PokemonListScreen
+ */
 @Preview
 @Composable
 fun PreviewPokemonListScreen() {
