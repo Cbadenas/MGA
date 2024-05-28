@@ -54,6 +54,9 @@ android {
 
 dependencies {
 
+    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -69,6 +72,9 @@ dependencies {
     kapt(libs.dagger.hilt.compiler)
 
     implementation(libs.hilt.navigation)
+
+    implementation(libs.coil)
+    implementation(libs.coil.compose)
 
 
     testImplementation(libs.junit)
